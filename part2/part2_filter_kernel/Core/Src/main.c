@@ -49,7 +49,12 @@ I2S_HandleTypeDef hi2s3;
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-
+volatile uint8_t *raw_data = 0x802002C;
+int8_t kernel[3][3] = {
+  { 0, 0, 0 },
+  { 0, 1, 0 },
+  { 0, 0, 0 }
+};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,7 +68,7 @@ static void MX_SPI1_Init(void);
 void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
-
+void image_filter();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -116,6 +121,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    image_filter();
     /* USER CODE END WHILE */
     MX_USB_HOST_Process();
 
@@ -410,7 +416,31 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void image_filter() {
+  uint8_t *data = (uint8_t *)raw_data;
+  uint8_t *filtered_data = (uint8_t *)0x802002C + (192 * 192 * 3);
+  int width = 192;  // Example width, adjust as needed
+  int height = 192; // Example height, adjust as needed
+  int channels = 3; // RGB
 
+  for (int y = 1; y < height - 1; y++) {
+      for (int x = 1; x < width - 1; x++) {
+          for (int c = 0; c < channels; c++) {
+              int sum = 0;
+              for (int ky = -1; ky <= 1; ky++) {
+                  for (int kx = -1; kx <= 1; kx++) {
+                      int pixel = data[((y + ky) * width + (x + kx)) * channels + c];
+                      sum += pixel * kernel[ky + 1][kx + 1];
+                  }
+              }
+              // Clamp the result to the valid range [0, 255]
+              if (sum < 0) sum = 0;
+              if (sum > 255) sum = 255;
+              filtered_data[(y * width + x) * channels + c] = (uint8_t)sum;
+          }
+      }
+  }
+}
 /* USER CODE END 4 */
 
 /**
