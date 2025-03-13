@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define OPTIMIZED 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,11 +49,11 @@ I2S_HandleTypeDef hi2s3;
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-volatile uint8_t *raw_data = 0x802002C;
+volatile int8_t *raw_data = 0x802002C;
 int8_t kernel[3][3] = {
-  { 0, 0, 0 },
-  { 0, 1, 0 },
-  { 0, 0, 0 }
+  { 0, -1, 0 },
+  { -1, 5, -1 },
+  { 0, -1, 0 }
 };
 /* USER CODE END PV */
 
@@ -69,6 +69,7 @@ void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
 void image_filter();
+void optimized_image_filter();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -121,7 +122,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    #ifdef OPTIMIZED
+    optimized_image_filter();
+    #endif
+
+    #ifndef
     image_filter();
+    #endif
     /* USER CODE END WHILE */
     MX_USB_HOST_Process();
 
@@ -417,8 +424,8 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void image_filter() {
-  uint8_t *data = (uint8_t *)raw_data;
-  uint8_t *filtered_data = (uint8_t *)0x802002C + (192 * 192 * 3);
+  int8_t *data = (int8_t *)raw_data;
+  int8_t *filtered_data = (int8_t *)0x802002C + (192 * 192 * 3);
   int width = 192;  // Example width, adjust as needed
   int height = 192; // Example height, adjust as needed
   int channels = 3; // RGB
@@ -429,14 +436,60 @@ void image_filter() {
               int sum = 0;
               for (int ky = -1; ky <= 1; ky++) {
                   for (int kx = -1; kx <= 1; kx++) {
-                      int pixel = data[((y + ky) * width + (x + kx)) * channels + c];
-                      sum += pixel * kernel[ky + 1][kx + 1];
+                    sum += data[((y + ky) * width + (x + kx)) * channels + c] * kernel[ky + 1][kx + 1];
                   }
               }
               // Clamp the result to the valid range [0, 255]
               if (sum < 0) sum = 0;
               if (sum > 255) sum = 255;
-              filtered_data[(y * width + x) * channels + c] = (uint8_t)sum;
+              filtered_data[(y * width + x) * channels + c] = (int8_t)sum;
+          }
+      }
+  }
+}
+
+void optimized_image_filter() {
+  register int8_t *data = (uint8_t *)raw_data;
+  register int8_t *filtered_data = (uint8_t *)0x802002C + (192 * 192 * 3);
+  register uint16_t width = 192;  // Example width, adjust as needed
+  register uint16_t height = 192; // Example height, adjust as needed
+  register uint16_t channels = 3; // RGB
+
+  for (register uint16_t y = 1; y < height - 1; y++) {
+      for (register uint16_t x = 1; x < width - 1; x++) {
+          for (register uint8_t c = 0; c < channels; c++) {
+            register int16_t sum = 0;
+              for (register uint8_t ky = -1; ky <= 1; ky++) {
+                  for (register uint8_t kx = -1; kx <= 1; kx++) {
+                    register uint16_t yy = y + ky;
+                    register uint16_t xx = x + kx;
+                    register uint16_t iChannel = (uint16_t) c;
+
+                    __asm volatile (
+                      "SMLAD %[xx], %[yy], %[width], %[xx]"
+                      "SMLAD %[iChannel], %[xx], %[iChannel], %[iChannel]"
+                      "SMLABB %[sum], %[data], %[kernel], %[sum]"
+                      : [sum] "+r" (sum)
+                        [xx] "+r" (xx), 
+                        [iChannel] "+r" (iChannel)
+                      : [data] "r" (data[iChannel]),
+                        [kernel] "r" (kernel[ky + 1][kx + 1])
+                        [yy] "r" (yy), [width] "r" (width)
+                    );
+                  }
+              }
+              // Clamp the result to the valid range [0, 255]
+              if (sum < 0) sum = 0;
+              if (sum > 255) sum = 255;
+              register uint16_t oChannel = c;
+              __asm volatile (
+                "SMLAD %[x], %[y], %[width], %[x]"
+                "SMLAD %[oChannel], %[x], %[oChannel], %[oChannel]"
+                : [x] "+r" (x), 
+                  [oChannel] "+r" (oChannel)
+                : [y] "r" (y), [width] "r" (width), [channels] "r" (channels)
+              );
+              filtered_data[oChannel] = (int8_t)sum;
           }
       }
   }
