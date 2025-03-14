@@ -1,14 +1,6 @@
 import numpy as np
 
-# Define 3x3 region extractor function
-
-# Gets the 3x3 region around the pixel at (x, y)
-"""
-Takes into account the edges of the image using the crop method. 
-It moves the kernel such that it is always within the bounds of the image.
-"""
-
-# Get the RGB values around the pixel at (x, y)
+# Get the 3x3 RGB values at target pixel
 def get_3x3_region(image, x, y):
     depth, height, width = image.shape
 
@@ -16,6 +8,9 @@ def get_3x3_region(image, x, y):
     output = np.zeros((depth, 3, 3), dtype=int)
 
     for i in range(depth):
+        # We need to consider the edges of the image by using the crop method. 
+        # It moves the kernel such that it is always within the bounds of the image.
+        
         # Handle edge case w/ crop method (move kernel to be within bounds)
         x = max(1, min(x, width - 2))
         y = max(1, min(y, height - 2))
@@ -25,7 +20,7 @@ def get_3x3_region(image, x, y):
 
     return output
 
-
+# Define convolution
 def convolution(image, kernel, target_pixel):
     x, y = target_pixel
     result_RGB = np.array([], dtype=int)
@@ -65,6 +60,10 @@ image = np.array([[[255, 0, 0, 128],
                    [0, 0, 0, 0],
                    [0, 0, 0, 0]]])
 
+'''
+*Aside*
+If you want to test processing an entire image, that is currently not supported.
+'''
 
 # Define kernels
 identity = np.array([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
