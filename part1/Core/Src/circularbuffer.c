@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/main.c
+  * @file    BSP/Src/circularbuffer
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM324xG BSP Drivers
   ******************************************************************************
@@ -84,6 +84,7 @@ static void SystemClock_Config(void);
 static void GPIOA_Init(void);
 static int16_t ProcessSample(int16_t newsample, int16_t* history);
 static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history);
+static int16_t ProcessBlock(int16_t newsample, int16_t* history);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -401,11 +402,11 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 
 	// set up and do our convolution
 	int tap = 0; // indexing filter_coeffs
-		int current = head; //  indexing history array
-		int32_t accumulator = 0;
-		for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
-			current = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
-			accumulator += (int32_t)filter_coeffs[tap] * (int32_t)history[current];
+	int current = head; //  indexing history array
+	int32_t accumulator = 0;
+	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
+		current = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
+		accumulator += (int32_t)filter_coeffs[tap] * (int32_t)history[current];
 		}
 
 	// assign new head and tail (if buffer full)
@@ -427,6 +428,11 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 
 	return temp;
 }
+
+static int16_t ProcessBlock(int16_t newsample, int16_t* history) {
+
+}
+
 
 #ifdef USE_FULL_ASSERT
 
