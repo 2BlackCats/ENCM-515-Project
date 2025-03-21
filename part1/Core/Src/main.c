@@ -44,6 +44,7 @@
     #define FUNCTIONAL_TEST 1
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 3
+	#define MAX_FRAME_IDX 2
 
 #elif CONFIG_MODE == 2  // Block processing enabled with frame size of 16
     #define NUMBER_OF_TAPS 256
@@ -51,6 +52,8 @@
     #define FUNCTIONAL_TEST 1
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 16
+	#define MAX_FRAME_IDX 15
+
 
 #else
     #error "invalid configuration selected"
@@ -72,8 +75,9 @@ uint32_t uwPrescalerValue = 0;
 uint32_t uwCapturedValue = 0;
 
 volatile int32_t *raw_audio = 0x802002C; // ignore first 44 bytes of header
-int16_t history_l[NUMBER_OF_TAPS + FRAME_SIZE];
-int16_t history_r[NUMBER_OF_TAPS + FRAME_SIZE];
+#define HISTORY_SIZE  NUMBER_OF_TAPS + FRAME_SIZEL
+int16_t history_l[HISTORY_SIZE];
+int16_t history_r[HISTORY_SIZE];
 volatile int overflow_count = 0;
 volatile int underflow_count = 0;
 
@@ -95,11 +99,10 @@ int16_t newSampleL = 0;
 int16_t newSampleR = 0;
 int16_t filteredSampleL;
 int16_t filteredSampleR;
-int head = 0;
-int tail = 0;
-int prev_head = 0; // the head of the previous frame processed
-
-
+static int head = 0;
+static int tail = 0;
+static int samples_since_last_frame = 0;
+static int16_t accumulators_16[FRAME_SIZE];
 static volatile int32_t filteredOutBufferA[BUFFER_SIZE];
 static volatile int32_t filteredOutBufferB[BUFFER_SIZE];
 static volatile int bufchoice = 0;
@@ -440,9 +443,7 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 
 	// assign new head and tail (if buffer full)
 	head = (head + 1) % NUMBER_OF_TAPS;
-	if (head == tail){
-		tail = (tail + 1) % NUMBER_OF_TAPS;
-	}
+
 
 
 	if (accumulator > 0x3FFFFFFF) {
@@ -458,27 +459,57 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 	return temp;
 }
 
+
+// frame based processing with frame_size = 3
 static int16_t *  ProcessBlock(int16_t newsample, int16_t* history) {
 
+	samples_since_last_frame++;
 	history[head] = newsample;
-	if (abs(head - prev_head)% NUMBER_OF_TAPS < 3){
-		head = (head + 1) % NUMBER_OF_TAPS;
-		return NULL; // remember to add a check in main when you return null
+	if (samples_since_last_frame < FRAME_SIZE){
+		head = (head + 1) % HISTORY_SIZE;
+
+		return NULL; // TO DO: remember to add a check in main when you return null
 		// returning null means that there are not enough samples to for the frame to be processed
 	}
-
+	samples_since_last_frame = 0;
 	// processing the frame
 
-	int16_t accumulators [3] = {0,0,0}; // accumulator[2] corresponds to the newest sample
+	int tap, current;
+	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
+	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
+			int32_t coeff = (int32_t)filter_coeffs[tap]; // loading the coefficient once
+			int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
+
+			for (int i = 0; i < FRAME_SIZE; i++){
+				int history_idx = (base_idx + i) % HISTORY_SIZE;
+				accumulators[i] += coeff * (int32_t)history[history_idx];
+			}
+
+			}
 
 
+	 // saving the index of the most recent sample
+	head = (head + 1) % HISTORY_SIZE; // moving the head
 
 
-	// add the new sample as head of history
-	// maybe have a check that there have been 3 new samples between new head and index of prev frame?
+	for (int i = 0; i < FRAME_SIZE; i++){
+		if (accumulators[i] > 0x3FFFFFFF) {
+				accumulators[i]= 0x3FFFFFFF;
+				overflow_count++;
+			} else if (accumulators[i] < -0x40000000) {
+				accumulators[i] = -0x40000000;
+				underflow_count++;
+			}
+
+			 accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
+
+	}
+
+
+	return accumulators_16;
+
 
 }
-
 
 
 #ifdef USE_FULL_ASSERT
