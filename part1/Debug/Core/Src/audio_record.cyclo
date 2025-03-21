@@ -1,0 +1,4 @@
+../Core/Src/audio_record.c:83:6:AudioRecord_Test	13
+../Core/Src/audio_record.c:216:6:BSP_AUDIO_IN_TransferComplete_CallBack	1
+../Core/Src/audio_record.c:226:6:BSP_AUDIO_IN_HalfTransfer_CallBack	1
+../Core/Src/audio_record.c:236:6:BSP_AUDIO_IN_Error_Callback	1
