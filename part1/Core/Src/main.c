@@ -29,19 +29,21 @@
 /* Private define ------------------------------------------------------------*/
 
 #define CONFIG_MODE 1
+#define true 1
+#define false 0
 
 
 #if CONFIG_MODE == 0  // Testing with linear and circular buffer
     #define NUMBER_OF_TAPS 256
     #define BUFFER_SIZE 32
-    #define FUNCTIONAL_TEST 1
+    #define FUNCTIONAL_TEST 0
     #define BLOCK_PROCESSING 0
     #define FRAME_SIZE 0
 
 #elif CONFIG_MODE == 1  // Block processing with frame size of 3
     #define NUMBER_OF_TAPS 256
     #define BUFFER_SIZE 32
-    #define FUNCTIONAL_TEST 1
+    #define FUNCTIONAL_TEST 0
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 3
 	#define MAX_FRAME_IDX 2
@@ -49,7 +51,7 @@
 #elif CONFIG_MODE == 2  // Block processing enabled with frame size of 16
     #define NUMBER_OF_TAPS 256
     #define BUFFER_SIZE 32
-    #define FUNCTIONAL_TEST 1
+    #define FUNCTIONAL_TEST 0
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 16
 	#define MAX_FRAME_IDX 15
@@ -75,7 +77,7 @@ uint32_t uwPrescalerValue = 0;
 uint32_t uwCapturedValue = 0;
 
 volatile int32_t *raw_audio = 0x802002C; // ignore first 44 bytes of header
-#define HISTORY_SIZE  NUMBER_OF_TAPS + FRAME_SIZEL
+#define HISTORY_SIZE  (NUMBER_OF_TAPS + FRAME_SIZE)
 int16_t history_l[HISTORY_SIZE];
 int16_t history_r[HISTORY_SIZE];
 volatile int overflow_count = 0;
@@ -98,6 +100,8 @@ static int sample_count = 0;
 int16_t newSampleL = 0;
 int16_t newSampleR = 0;
 int16_t filteredSampleL;
+int16_t filteredSamplesLFrame [FRAME_SIZE];
+
 int16_t filteredSampleR;
 static int head = 0;
 static int tail = 0;
@@ -114,7 +118,7 @@ static void SystemClock_Config(void);
 static void GPIOA_Init(void);
 static int16_t ProcessSample(int16_t newsample, int16_t* history);
 static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history);
-static int16_t *ProcessBlock(int16_t newsample, int16_t* history);
+static int ProcessBlock(int16_t newsample, int16_t* history);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -206,22 +210,59 @@ int main(void)
 #ifndef FUNCTIONAL_TEST
 	if (new_sample_flag == 1) {
 #endif
-		// TO DO: need to add an if else to determine what configuration was chosen: circular buffer, or frame based processing
-
-		filteredSampleL = ProcessSampleCircular(newSampleL,history_l); // "L"
-		new_sample_flag = 0;
-		if (i < NUMBER_OF_TAPS-1) {
-			filteredSampleL = 0;
-			i++;
-		} else {
-			if (bufchoice == 0) {
-				filteredOutBufferA[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL; // copy the filtered output to both channels
+		if (CONFIG_MODE == 0){
+			filteredSampleL = ProcessSampleCircular(newSampleL,history_l); // "L"
+			new_sample_flag = 0;
+			if (i < NUMBER_OF_TAPS-1) {
+				filteredSampleL = 0;
+				i++;
 			} else {
-				filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
-			}
+				if (bufchoice == 0) {
+					filteredOutBufferA[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL; // copy the filtered output to both channels
+				} else {
+					filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
+				}
 
-			k++;
+				k++;
+				if (k == BUFFER_SIZE){
+					k = 0;
+				}
+
+			}
+		}else if (CONFIG_MODE == 1 || CONFIG_MODE == 2){
+
+			new_sample_flag = 0;
+
+			if (ProcessBlock(newSampleL,history_l)){
+				if (i < HISTORY_SIZE-1) {
+					i+=FRAME_SIZE;
+				} else {
+					int frame_counter = 0;
+					while (frame_counter < FRAME_SIZE) {
+						if (k == BUFFER_SIZE) {
+							k = 0;  // Reset k when it exceeds BUFFER_SIZE
+						}
+
+						if (bufchoice == 0) {
+							filteredOutBufferA[k] = ((int32_t)accumulators_16[frame_counter] << 16) + (int32_t)accumulators_16[frame_counter];
+						} else {
+							filteredOutBufferB[k] = ((int32_t)accumulators_16[frame_counter] << 16) + (int32_t)accumulators_16[frame_counter];
+						}
+
+						k++;
+						frame_counter++;
+					}
+
+
+				}
+}
+
+
+
 		}
+
+
+
 
 #ifndef FUNCTIONAL_TEST
 	}
@@ -460,16 +501,15 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 }
 
 
-// frame based processing with frame_size = 3
-static int16_t *  ProcessBlock(int16_t newsample, int16_t* history) {
+static int  ProcessBlock(int16_t newsample, int16_t* history) {
 
 	samples_since_last_frame++;
 	history[head] = newsample;
 	if (samples_since_last_frame < FRAME_SIZE){
 		head = (head + 1) % HISTORY_SIZE;
 
-		return NULL; // TO DO: remember to add a check in main when you return null
-		// returning null means that there are not enough samples to for the frame to be processed
+		return false; // TO DO: remember to add a check in main when you return null
+		// returning false means that there are not enough samples to for the frame to be processed
 	}
 	samples_since_last_frame = 0;
 	// processing the frame
@@ -488,7 +528,6 @@ static int16_t *  ProcessBlock(int16_t newsample, int16_t* history) {
 			}
 
 
-	 // saving the index of the most recent sample
 	head = (head + 1) % HISTORY_SIZE; // moving the head
 
 
@@ -501,12 +540,12 @@ static int16_t *  ProcessBlock(int16_t newsample, int16_t* history) {
 				underflow_count++;
 			}
 
-			 accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
+		accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
 
 	}
 
 
-	return accumulators_16;
+	return true;
 
 
 }
