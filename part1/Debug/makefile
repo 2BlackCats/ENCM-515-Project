@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -41,34 +41,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := lab2_proj
+BUILD_ARTIFACT_NAME := part1
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-lab2_proj.elf \
+part1.elf \
+
+MAP_FILES += \
+part1.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-lab2_proj.list \
-
-OBJCOPY_BIN += \
-lab2_proj.bin \
+part1.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: lab2_proj.elf secondary-outputs
+main-build: part1.elf secondary-outputs
 
 # Tool invocations
-lab2_proj.elf: $(OBJS) $(USER_OBJS) C:\Users\psbta\OneDrive\ -\ University\ of\ Calgary\2021-2022\ Academic\ Year\Teaching\Winter\ Term\ 2022\New\ Materials\Laboratories\lab_2\lab2_proj\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "lab2_proj.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\psbta\OneDrive - University of Calgary\2021-2022 Academic Year\Teaching\Winter Term 2022\New Materials\Laboratories\lab_2\lab2_proj\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab2_proj.map" -Wl,--gc-sections -static -L"C:\Users\psbta\OneDrive - University of Calgary\2021-2022 Academic Year\Teaching\Winter Term 2022\New Materials\Laboratories\lab_2\lab2_proj\Drivers\CMSIS\Lib\GCC" -L../Middlewares/ST/STM32_Audio/Addons/PDM/Lib --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+part1.elf part1.map: $(OBJS) $(USER_OBJS) C:\Users\julie\school\3rd\encm515\lab_materials_2025\final_proj\ENCM-515-Project\part1\STM32F411VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "part1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\julie\school\3rd\encm515\lab_materials_2025\final_proj\ENCM-515-Project\part1\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part1.map" -Wl,--gc-sections -static -L"C:\Users\julie\school\3rd\encm515\lab_materials_2025\final_proj\ENCM-515-Project\part1\Drivers\CMSIS\Lib\GCC" -L../Middlewares/ST/STM32_Audio/Addons/PDM/Lib --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -77,22 +77,17 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-lab2_proj.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "lab2_proj.list"
-	@echo 'Finished building: $@'
-	@echo ' '
-
-lab2_proj.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "lab2_proj.bin"
+part1.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "part1.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout lab2_proj.bin lab2_proj.elf lab2_proj.list
+	-$(RM) default.size.stdout part1.elf part1.list part1.map
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

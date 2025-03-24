@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    BSP/Src/main.c
+  * @file    BSP/Src/circularbuffer
   * @author  MCD Application Team
   * @brief   This example code shows how to use the STM324xG BSP Drivers
   ******************************************************************************
@@ -27,10 +27,39 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define NUMBER_OF_TAPS	220
-#define BUFFER_SIZE 32
-#define FUNCTIONAL_TEST 1 // uncomment this flag if we want to test the code without the interrupt
 
+#define CONFIG_MODE 1
+#define true 1
+#define false 0
+
+
+#if CONFIG_MODE == 0  // Testing with linear and circular buffer
+    #define NUMBER_OF_TAPS 256
+    #define BUFFER_SIZE 32
+    #define FUNCTIONAL_TEST 0
+    #define BLOCK_PROCESSING 0
+    #define FRAME_SIZE 0
+
+#elif CONFIG_MODE == 1  // Block processing with frame size of 3
+    #define NUMBER_OF_TAPS 256
+    #define BUFFER_SIZE 32
+    #define FUNCTIONAL_TEST 0
+    #define BLOCK_PROCESSING 1
+    #define FRAME_SIZE 3
+	#define MAX_FRAME_IDX 2
+
+#elif CONFIG_MODE == 2  // Block processing enabled with frame size of 16
+    #define NUMBER_OF_TAPS 256
+    #define BUFFER_SIZE 32
+    #define FUNCTIONAL_TEST 0
+    #define BLOCK_PROCESSING 1
+    #define FRAME_SIZE 16
+	#define MAX_FRAME_IDX 15
+
+
+#else
+    #error "invalid configuration selected"
+#endif
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
@@ -48,10 +77,12 @@ uint32_t uwPrescalerValue = 0;
 uint32_t uwCapturedValue = 0;
 
 volatile int32_t *raw_audio = 0x802002C; // ignore first 44 bytes of header
-int16_t history_l[NUMBER_OF_TAPS];
-int16_t history_r[NUMBER_OF_TAPS];
+#define HISTORY_SIZE  (NUMBER_OF_TAPS + FRAME_SIZE)
+int16_t history_l[HISTORY_SIZE];
+int16_t history_r[HISTORY_SIZE];
 volatile int overflow_count = 0;
 volatile int underflow_count = 0;
+
 
 /* 256 */
 int16_t filter_coeffs[NUMBER_OF_TAPS] = {-3, -8, -8, -12, -13, -13, -12, -9, -4, 1, 6, 10, 11, 9, 5, 0, -6, -11, -13, -13, -9, -2, 6, 13, 17, 17, 13, 5, -5, -14, -21, -23, -19, -10, 2, 15, 25, 30, 27, 17, 2, -15, -29, -37, -36, -26, -8, 13, 33, 45, 47, 37, 17, -9, -35, -53, -59, -50, -28, 3, 36, 61, 73, 66, 43, 6, -34, -69, -88, -86, -61, -20, 30, 75, 104, 108, 85, 38, -22, -80, -122, -135, -114, -63, 9, 83, 142, 167, 152, 96, 11, -83, -163, -207, -200, -142, -41, 78, 187, 257, 266, 206, 87, -66, -217, -327, -362, -306, -163, 41, 259, 436, 522, 481, 303, 14, -331, -654, -866, -886, -661, -174, 543, 1416, 2336, 3176, 3818, 4164, 4164, 3818, 3176, 2336, 1416, 543, -174, -661, -886, -866, -654, -331, 14, 303, 481, 522, 436, 259, 41, -163, -306, -362, -327, -217, -66, 87, 206, 266, 257, 187, 78, -41, -142, -200, -207, -163, -83, 11, 96, 152, 167, 142, 83, 9, -63, -114, -135, -122, -80, -22, 38, 85, 108, 104, 75, 30, -20, -61, -86, -88, -69, -34, 6, 43, 66, 73, 61, 36, 3, -28, -50, -59, -53, -35, -9, 17, 37, 47, 45, 33, 13, -8, -26, -36, -37, -29, -15, 2, 17, 27, 30, 25, 15, 2, -10, -19, -23, -21, -14, -5, 5, 13, 17, 17, 13, 6, -2, -9, -13, -13, -11, -6, 0, 5, 9, 11, 10, 6, 1, -4, -9, -12, -13, -13, -12, -8, -8, -3};
@@ -69,10 +100,13 @@ static int sample_count = 0;
 int16_t newSampleL = 0;
 int16_t newSampleR = 0;
 int16_t filteredSampleL;
-int16_t filteredSampleR;
-int head = 0;
-int tail = 0;
+int16_t filteredSamplesLFrame [FRAME_SIZE];
 
+int16_t filteredSampleR;
+static int head = 0;
+static int tail = 0;
+static int samples_since_last_frame = 0;
+static int16_t accumulators_16[FRAME_SIZE];
 static volatile int32_t filteredOutBufferA[BUFFER_SIZE];
 static volatile int32_t filteredOutBufferB[BUFFER_SIZE];
 static volatile int bufchoice = 0;
@@ -84,6 +118,7 @@ static void SystemClock_Config(void);
 static void GPIOA_Init(void);
 static int16_t ProcessSample(int16_t newsample, int16_t* history);
 static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history);
+static int ProcessBlock(int16_t newsample, int16_t* history);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -175,21 +210,59 @@ int main(void)
 #ifndef FUNCTIONAL_TEST
 	if (new_sample_flag == 1) {
 #endif
-
-		filteredSampleL = ProcessSampleCircular(newSampleL,history_l); // "L"
-		new_sample_flag = 0;
-		if (i < NUMBER_OF_TAPS-1) {
-			filteredSampleL = 0;
-			i++;
-		} else {
-			if (bufchoice == 0) {
-				filteredOutBufferA[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL; // copy the filtered output to both channels
+		if (CONFIG_MODE == 0){
+			filteredSampleL = ProcessSampleCircular(newSampleL,history_l); // "L"
+			new_sample_flag = 0;
+			if (i < NUMBER_OF_TAPS-1) {
+				filteredSampleL = 0;
+				i++;
 			} else {
-				filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
-			}
+				if (bufchoice == 0) {
+					filteredOutBufferA[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL; // copy the filtered output to both channels
+				} else {
+					filteredOutBufferB[k] = ((int32_t)filteredSampleL << 16) + (int32_t)filteredSampleL;
+				}
 
-			k++;
+				k++;
+				if (k == BUFFER_SIZE){
+					k = 0;
+				}
+
+			}
+		}else if (CONFIG_MODE == 1 || CONFIG_MODE == 2){
+
+			new_sample_flag = 0;
+
+			if (ProcessBlock(newSampleL,history_l)){
+				if (i < HISTORY_SIZE-1) {
+					i+=FRAME_SIZE;
+				} else {
+					int frame_counter = 0;
+					while (frame_counter < FRAME_SIZE) {
+						if (k == BUFFER_SIZE) {
+							k = 0;  // Reset k when it exceeds BUFFER_SIZE
+						}
+
+						if (bufchoice == 0) {
+							filteredOutBufferA[k] = ((int32_t)accumulators_16[frame_counter] << 16) + (int32_t)accumulators_16[frame_counter];
+						} else {
+							filteredOutBufferB[k] = ((int32_t)accumulators_16[frame_counter] << 16) + (int32_t)accumulators_16[frame_counter];
+						}
+
+						k++;
+						frame_counter++;
+					}
+
+
+				}
+}
+
+
+
 		}
+
+
+
 
 #ifndef FUNCTIONAL_TEST
 	}
@@ -329,6 +402,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 #endif
 }
 
+
 int _write(int file, char* ptr, int len) {
 	int DataIdx;
 
@@ -401,18 +475,16 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 
 	// set up and do our convolution
 	int tap = 0; // indexing filter_coeffs
-		int current = head; //  indexing history array
-		int32_t accumulator = 0;
-		for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
-			current = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
-			accumulator += (int32_t)filter_coeffs[tap] * (int32_t)history[current];
+	int current = head; //  indexing history array
+	int32_t accumulator = 0;
+	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
+		current = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
+		accumulator += (int32_t)filter_coeffs[tap] * (int32_t)history[current];
 		}
 
 	// assign new head and tail (if buffer full)
 	head = (head + 1) % NUMBER_OF_TAPS;
-	if (head == tail){
-		tail = (tail + 1) % NUMBER_OF_TAPS;
-	}
+
 
 
 	if (accumulator > 0x3FFFFFFF) {
@@ -427,6 +499,57 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 
 	return temp;
 }
+
+
+static int  ProcessBlock(int16_t newsample, int16_t* history) {
+
+	samples_since_last_frame++;
+	history[head] = newsample;
+	if (samples_since_last_frame < FRAME_SIZE){
+		head = (head + 1) % HISTORY_SIZE;
+
+		return false; // TO DO: remember to add a check in main when you return null
+		// returning false means that there are not enough samples to for the frame to be processed
+	}
+	samples_since_last_frame = 0;
+	// processing the frame
+
+	int tap, current;
+	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
+	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
+			int32_t coeff = (int32_t)filter_coeffs[tap]; // loading the coefficient once
+			int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
+
+			for (int i = 0; i < FRAME_SIZE; i++){
+				int history_idx = (base_idx + i) % HISTORY_SIZE;
+				accumulators[i] += coeff * (int32_t)history[history_idx];
+			}
+
+			}
+
+
+	head = (head + 1) % HISTORY_SIZE; // moving the head
+
+
+	for (int i = 0; i < FRAME_SIZE; i++){
+		if (accumulators[i] > 0x3FFFFFFF) {
+				accumulators[i]= 0x3FFFFFFF;
+				overflow_count++;
+			} else if (accumulators[i] < -0x40000000) {
+				accumulators[i] = -0x40000000;
+				underflow_count++;
+			}
+
+		accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
+
+	}
+
+
+	return true;
+
+
+}
+
 
 #ifdef USE_FULL_ASSERT
 
