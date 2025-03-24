@@ -1,6 +1,8 @@
 import numpy as np
 
 # Get the 3x3 RGB values at target pixel
+
+
 def get_3x3_region(image, x, y):
     depth, height, width = image.shape
 
@@ -8,9 +10,9 @@ def get_3x3_region(image, x, y):
     output = np.zeros((depth, 3, 3), dtype=int)
 
     for i in range(depth):
-        # We need to consider the edges of the image by using the crop method. 
+        # We need to consider the edges of the image by using the crop method.
         # It moves the kernel such that it is always within the bounds of the image.
-        
+
         # Handle edge case w/ crop method (move kernel to be within bounds)
         x = max(1, min(x, width - 2))
         y = max(1, min(y, height - 2))
@@ -21,6 +23,8 @@ def get_3x3_region(image, x, y):
     return output
 
 # Define convolution
+
+
 def convolution(image, kernel, target_pixel):
     x, y = target_pixel
     result_RGB = np.array([], dtype=int)
@@ -33,7 +37,8 @@ def convolution(image, kernel, target_pixel):
         accumulator = 0
         for row_index in range(height):
             for col_index in range(width):
-                accumulator += color_channel[row_index, col_index] * kernel[row_index, col_index]
+                accumulator += color_channel[row_index,
+                                             col_index] * kernel[row_index, col_index]
 
         # Clip the value to be within RGB range (0-255)
         accumulator = np.clip(accumulator, 0, 255)
@@ -49,12 +54,12 @@ image = np.array([[[255, 0, 0, 128],
                    [0, 0, 0, 0],
                    [0, 0, 0, 0],
                    [128, 128, 128, 128]],
-# G portion of 4x4 pixel image
+                  # G portion of 4x4 pixel image
                   [[0, 255, 0, 128],
                    [0, 0, 0, 0],
                    [128, 128, 128, 128],
                    [0, 0, 0, 0]],
-# B portion of 4x4 pixel image
+                  # B portion of 4x4 pixel image
                   [[0, 0, 255, 128],
                    [128, 128, 128, 128],
                    [0, 0, 0, 0],
@@ -70,6 +75,6 @@ identity = np.array([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
 sharpen = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
 
 # Test kernel filter
-print(get_3x3_region(image, 0, 1))
+print(get_3x3_region(image2, 0, 1))
 print("\n")
-print(convolution(image, sharpen, (0,1)))
+print(convolution(image2, sharpen, (0, 1)))
