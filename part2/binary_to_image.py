@@ -44,4 +44,7 @@ def binary_to_rgb_images(binary_file, width, height):
 
 
 # Example usage
-binary_to_rgb_images("part2/combined.bin", 64, 64)
+# binary_to_rgb_images("part2/combined.bin", 64, 64)
+
+# Filter
+binary_to_rgb_images("part2/test.bin", 64, 64)
