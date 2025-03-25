@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000073ec  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000dce2  00000000  00000000  0000741c  2**0
+ 12 .debug_info   0000ddbc  00000000  00000000  0000741c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00002281  00000000  00000000  000150fe  2**0
+ 13 .debug_abbrev 00002281  00000000  00000000  000151d8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000d60  00000000  00000000  00017380  2**3
+ 14 .debug_aranges 00000d68  00000000  00000000  00017460  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000a3c  00000000  00000000  000180e0  2**0
+ 15 .debug_rnglists 00000a43  00000000  00000000  000181c8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0000341d  00000000  00000000  00018b1c  2**0
+ 16 .debug_macro  00003423  00000000  00000000  00018c0b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000fac1  00000000  00000000  0001bf39  2**0
+ 17 .debug_line   0000fbbd  00000000  00000000  0001c02e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0009abb5  00000000  00000000  0002b9fa  2**0
+ 18 .debug_str    0009abc9  00000000  00000000  0002bbeb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000c65af  2**0
+ 19 .comment      00000043  00000000  00000000  000c67b4  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000046fc  00000000  00000000  000c65f4  2**2
+ 20 .debug_frame  00004724  00000000  00000000  000c67f8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000085  00000000  00000000  000cacf0  2**0
+ 21 .debug_line_str 00000085  00000000  00000000  000caf1c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1399,17 +1399,17 @@ int main(void)
  8000fb6:	4b36      	ldr	r3, [pc, #216]	@ (8001090 <main+0x198>)
  8000fb8:	2200      	movs	r2, #0
  8000fba:	601a      	str	r2, [r3, #0]
-					}
+				}
 
 			}
-		}else if (CONFIG_MODE == 1 || CONFIG_MODE == 2){
+		}else {
 
 			new_sample_flag = 0;
  8000fbc:	4b38      	ldr	r3, [pc, #224]	@ (80010a0 <main+0x1a8>)
  8000fbe:	2200      	movs	r2, #0
  8000fc0:	601a      	str	r2, [r3, #0]
 
-			if (ProcessBlock(newSampleL,history_l)){
+			if ((MLA == 0 && ProcessBlock(newSampleL,history_l))|| (MLA == 1 && ProcessBlock2(newSampleL,history_l))){
  8000fc2:	4b35      	ldr	r3, [pc, #212]	@ (8001098 <main+0x1a0>)
  8000fc4:	f9b3 3000 	ldrsh.w	r3, [r3]
  8000fc8:	4936      	ldr	r1, [pc, #216]	@ (80010a4 <main+0x1ac>)
@@ -1906,7 +1906,7 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
  80012be:	4b5e      	ldr	r3, [pc, #376]	@ (8001438 <ProcessBlock+0x1c4>)
  80012c0:	601a      	str	r2, [r3, #0]
 
-		return false; // TO DO: remember to add a check in main when you return null
+		return false;
  80012c2:	2300      	movs	r3, #0
  80012c4:	e0b0      	b.n	8001428 <ProcessBlock+0x1b4>
 		// returning false means that there are not enough samples to for the frame to be processed
@@ -1915,8 +1915,9 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
  80012c6:	4b5b      	ldr	r3, [pc, #364]	@ (8001434 <ProcessBlock+0x1c0>)
  80012c8:	2200      	movs	r2, #0
  80012ca:	601a      	str	r2, [r3, #0]
-	// processing the frame
 
+
+	// processing the frame
 	int tap, current;
 	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
  80012cc:	f107 0308 	add.w	r3, r7, #8
@@ -2009,11 +2010,11 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
  800137a:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
  800137c:	2bff      	cmp	r3, #255	@ 0xff
  800137e:	ddb1      	ble.n	80012e4 <ProcessBlock+0x70>
+			}
 
 			}
 
 
-	 // saving the index of the most recent sample
 	head = (head + 1) % HISTORY_SIZE; // moving the head
  8001380:	4b2d      	ldr	r3, [pc, #180]	@ (8001438 <ProcessBlock+0x1c4>)
  8001382:	681b      	ldr	r3, [r3, #0]
@@ -2082,7 +2083,7 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
  8001400:	6013      	str	r3, [r2, #0]
 			}
 
-			 accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
+		accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
  8001402:	6a3b      	ldr	r3, [r7, #32]
  8001404:	009b      	lsls	r3, r3, #2
  8001406:	3330      	adds	r3, #48	@ 0x30

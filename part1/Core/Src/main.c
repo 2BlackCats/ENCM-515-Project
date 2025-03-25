@@ -39,6 +39,7 @@
     #define FUNCTIONAL_TEST 0
     #define BLOCK_PROCESSING 0
     #define FRAME_SIZE 0
+	#define MLA 0
 
 #elif CONFIG_MODE == 1  // Block processing with frame size of 3
     #define NUMBER_OF_TAPS 256
@@ -47,6 +48,7 @@
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 3
 	#define MAX_FRAME_IDX 2
+	#define MLA 0
 
 #elif CONFIG_MODE == 2  // Block processing enabled with frame size of 16
     #define NUMBER_OF_TAPS 256
@@ -55,7 +57,28 @@
     #define BLOCK_PROCESSING 1
     #define FRAME_SIZE 16
 	#define MAX_FRAME_IDX 15
+	#define MLA 0
 
+
+
+#elif CONFIG_MODE == 3  // Block processing with frame size of 3
+    #define NUMBER_OF_TAPS 256
+    #define BUFFER_SIZE 32
+    #define FUNCTIONAL_TEST 0
+    #define BLOCK_PROCESSING 1
+    #define FRAME_SIZE 3
+	#define MAX_FRAME_IDX 2
+	#define MLA 1
+
+
+#elif CONFIG_MODE == 4  // Block processing with SMLAD enabled with frame size of 16
+    #define NUMBER_OF_TAPS 256
+    #define BUFFER_SIZE 32
+    #define FUNCTIONAL_TEST 0
+    #define BLOCK_PROCESSING 1
+    #define FRAME_SIZE 16
+	#define MAX_FRAME_IDX 15
+	#define MLA 1
 
 #else
     #error "invalid configuration selected"
@@ -119,6 +142,8 @@ static void GPIOA_Init(void);
 static int16_t ProcessSample(int16_t newsample, int16_t* history);
 static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history);
 static int ProcessBlock(int16_t newsample, int16_t* history);
+static int ProcessBlock2(int16_t newsample, int16_t* history);
+
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -229,11 +254,11 @@ int main(void)
 				}
 
 			}
-		}else if (CONFIG_MODE == 1 || CONFIG_MODE == 2){
+		}else {
 
 			new_sample_flag = 0;
 
-			if (ProcessBlock(newSampleL,history_l)){
+			if ((MLA == 0 && ProcessBlock(newSampleL,history_l))|| (MLA == 1 && ProcessBlock2(newSampleL,history_l))){
 				if (i < HISTORY_SIZE-1) {
 					i+=FRAME_SIZE;
 				} else {
@@ -255,7 +280,7 @@ int main(void)
 
 
 				}
-}
+			}
 
 
 
@@ -508,12 +533,13 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
 	if (samples_since_last_frame < FRAME_SIZE){
 		head = (head + 1) % HISTORY_SIZE;
 
-		return false; // TO DO: remember to add a check in main when you return null
+		return false;
 		// returning false means that there are not enough samples to for the frame to be processed
 	}
 	samples_since_last_frame = 0;
-	// processing the frame
 
+
+	// processing the frame
 	int tap, current;
 	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
 	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
@@ -549,6 +575,64 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
 
 
 }
+static int  ProcessBlock2(int16_t newsample, int16_t* history) {
+
+	samples_since_last_frame++;
+	history[head] = newsample;
+	if (samples_since_last_frame < FRAME_SIZE){
+		head = (head + 1) % HISTORY_SIZE;
+
+		return false;
+		// returning false means that there are not enough samples to for the frame to be processed
+	}
+	samples_since_last_frame = 0;
+
+
+	// processing the frame
+	int tap, current;
+	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
+	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
+			int32_t coeff = (int32_t)filter_coeffs[tap]; // loading the coefficient once
+			int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
+
+			for (int i = 0; i < FRAME_SIZE; i++){
+
+				int history_idx = (base_idx + i) % HISTORY_SIZE;
+
+				// accumulating using MLA
+				__asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
+									: [result] "=r" (accumulators[i])
+									: [op1] "r" (coeff),
+									  [op2] "r" ((int32_t)history[history_idx]),
+									  [acc] "r" (accumulators[i])
+									);
+			}
+
+			}
+
+
+	head = (head + 1) % HISTORY_SIZE; // moving the head
+
+
+	for (int i = 0; i < FRAME_SIZE; i++){
+		if (accumulators[i] > 0x3FFFFFFF) {
+				accumulators[i]= 0x3FFFFFFF;
+				overflow_count++;
+			} else if (accumulators[i] < -0x40000000) {
+				accumulators[i] = -0x40000000;
+				underflow_count++;
+			}
+
+		accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
+
+	}
+
+
+	return true;
+
+
+}
+
 
 
 #ifdef USE_FULL_ASSERT
