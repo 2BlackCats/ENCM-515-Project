@@ -35,6 +35,11 @@
 
 #define OPTIMIZED 1
 
+#define HEIGHT 64
+#define WIDTH 64
+#define CHANNELS 3
+#define TOTAL_IMAGES 5
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -52,6 +57,7 @@ SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
 volatile uint8_t *raw_data = (uint8_t *)0x8020000;
+volatile uint8_t *output_data = (uint8_t *)0x8020000 + (HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
 int16_t kernel[3][3] = {
     {0, -1, 0},
     {-1, 5, -1},
@@ -67,8 +73,8 @@ static void MX_I2S2_Init(void);
 static void MX_I2S3_Init(void);
 static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
-void image_filter();
-void optimized_image_filter();
+void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+void optimized_image_filter(uint8_t *image_addr, uint8_t *output_addr);
 int _write(int file, char *ptr, int len);
 /* USER CODE END PFP */
 
@@ -118,22 +124,27 @@ int main(void)
 
 #ifdef OPTIMIZED
   ITM_Port32(30) = 1;
-  optimized_image_filter();
+  ITM_Port32(31) = 1;
+  for (int i = 0; i < TOTAL_IMAGES; i++) {
+	  optimized_image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+			  	   output_data + (i * HEIGHT * WIDTH * CHANNELS));
+  }
   ITM_Port32(30) = 2;
 #endif
 
 #ifndef OPTIMIZED
   ITM_Port32(31) = 1;
-  image_filter();
+  for (int i = 0; i < TOTAL_IMAGES; i++) {
+	  image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+			  	   output_data + (i * HEIGHT * WIDTH * CHANNELS));
+  }
   ITM_Port32(31) = 2;
 #endif
-  //  volatile uint8_t* unfiltered_data = (uint8_t *)raw_data;
-  //    // Print the filtered data
-  //    for (int i = 0; i < 64 * 64 * 3; i++) {
-  //            printf("%d, ", unfiltered_data[i]);
-  //            if ((i + 1) % 3 == 0) printf("|");
-  //            if ((i + 1) % (64 * 3) == 0) printf("\n\n");
-  //    }
+
+  for (int i = 0; i < (WIDTH*HEIGHT*CHANNELS); i++){
+	  uint8_t ryan = output_data[i];
+	  printf("%u |", ryan);
+  }
 
   /* USER CODE END 2 */
 
@@ -441,26 +452,20 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void image_filter()
+void image_filter(uint8_t *image_addr, uint8_t *output_addr)
 {
-  volatile uint8_t *data = (uint8_t *)raw_data;
-  int width = 64;   // Example width, adjust as needed
-  int height = 64;  // Example height, adjust as needed
-  int channels = 3; // RGB
-
-  for (int y = 1; y < height - 1; y++)
+  for (int y = 1; y < HEIGHT - 1; y++)
   {
-    for (int x = 1; x < width - 1; x++)
+    for (int x = 1; x < WIDTH - 1; x++)
     {
-      for (int c = 0; c < channels; c++)
+      for (int c = 0; c < CHANNELS; c++)
       {
         int sum = 0;
         for (int ky = -1; ky <= 1; ky++)
         {
           for (int kx = -1; kx <= 1; kx++)
           {
-            sum += (int)(data[((y + ky) * width + (x + kx)) * channels + c] * kernel[ky + 1][kx + 1]);
-            printf("%d, ", (int)(data[((y + ky) * width + (x + kx)) * channels + c] * kernel[ky + 1][kx + 1]));
+            sum += (int)(image_addr[((y + ky) * WIDTH + (x + kx)) * CHANNELS + c] * kernel[ky + 1][kx + 1]);
           }
         }
         // Clamp the result to the valid range [0, 255]
@@ -468,39 +473,38 @@ void image_filter()
           sum = 0;
         if (sum > 255)
           sum = 255;
-        printf("|%d| \n\n", sum);
+
+        output_addr += 8;
+        *output_addr = sum;
+
       }
     }
   }
 }
 
-void optimized_image_filter()
+void optimized_image_filter(uint8_t *image_addr, uint8_t *output_addr)
 {
-  volatile uint8_t *data = (uint8_t *)raw_data;
-  int width = 64;   // Example width, adjust as needed
-  int height = 64;  // Example height, adjust as needed
-  int channels = 3; // RGB
 
-  for (int y = 1; y < height - 1; y++)
+  for (int y = 1; y < HEIGHT - 1; y++)
   {
-    for (int x = 1; x < width - 1; x++)
+    for (int x = 1; x < WIDTH - 1; x++)
     {
-      for (int c = 0; c < channels; c++)
+      for (int c = 0; c < CHANNELS; c++)
       {
         int sum = 0;
 
         // Unroll the kernel loops
-        sum += (int)(data[((y - 1) * width + (x - 1)) * channels + c] * kernel[0][0]);
-        sum += (int)(data[((y - 1) * width + (x)) * channels + c] * kernel[0][1]);
-        sum += (int)(data[((y - 1) * width + (x + 1)) * channels + c] * kernel[0][2]);
+        sum += (int)(image_addr[((y - 1) * WIDTH + (x - 1)) * CHANNELS + c] * kernel[0][0]);
+        sum += (int)(image_addr[((y - 1) * WIDTH + (x)) * CHANNELS + c] * kernel[0][1]);
+        sum += (int)(image_addr[((y - 1) * WIDTH + (x + 1)) * CHANNELS + c] * kernel[0][2]);
 
-        sum += (int)(data[((y)*width + (x - 1)) * channels + c] * kernel[1][0]);
-        sum += (int)(data[((y)*width + (x)) * channels + c] * kernel[1][1]);
-        sum += (int)(data[((y)*width + (x + 1)) * channels + c] * kernel[1][2]);
+        sum += (int)(image_addr[((y)*WIDTH + (x - 1)) * CHANNELS + c] * kernel[1][0]);
+        sum += (int)(image_addr[((y)*WIDTH + (x)) * CHANNELS + c] * kernel[1][1]);
+        sum += (int)(image_addr[((y)*WIDTH + (x + 1)) * CHANNELS + c] * kernel[1][2]);
 
-        sum += (int)(data[((y + 1) * width + (x - 1)) * channels + c] * kernel[2][0]);
-        sum += (int)(data[((y + 1) * width + (x)) * channels + c] * kernel[2][1]);
-        sum += (int)(data[((y + 1) * width + (x + 1)) * channels + c] * kernel[2][2]);
+        sum += (int)(image_addr[((y + 1) * WIDTH + (x - 1)) * CHANNELS + c] * kernel[2][0]);
+        sum += (int)(image_addr[((y + 1) * WIDTH + (x)) * CHANNELS + c] * kernel[2][1]);
+        sum += (int)(image_addr[((y + 1) * WIDTH + (x + 1)) * CHANNELS + c] * kernel[2][2]);
 
         // Clamp the result to the valid range [0, 255]
         if (sum < 0)
@@ -508,7 +512,9 @@ void optimized_image_filter()
         if (sum > 255)
           sum = 255;
 
-        printf("|%d| \n\n", sum);
+        output_addr += 8;
+        *output_addr = sum;
+
       }
     }
   }

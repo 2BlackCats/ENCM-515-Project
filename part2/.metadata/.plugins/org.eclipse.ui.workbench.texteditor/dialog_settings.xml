@@ -3,6 +3,10 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="unrolled"/>
+		<item value="ITM_port32(30)"/>
+		<item value="optimized"/>
+		<item value="while"/>
 		<item value="main"/>
 		<item value="opti"/>
 		<item value="optiim"/>
@@ -11,7 +15,6 @@
 		<item value="filtered_data"/>
 		<item value="uint8_t"/>
 		<item value="volatile"/>
-		<item value="while"/>
 		<item value="whil"/>
 		<item value="print"/>
 		<item value="begin 4"/>

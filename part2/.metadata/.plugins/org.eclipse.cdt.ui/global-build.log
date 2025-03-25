@@ -2682,3 +2682,1105 @@ arm-none-eabi-size  part2_filter_kernel.elf
   16312	    128	   2224	  18664	   48e8	part2_filter_kernel.elf
 Finished building: default.size.stdout
  
+17:02:18 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:42:8: error: no macro name given in #define directive
+   42 | #define
+      |        ^
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:02:36 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16240	    128	   2224	  18592	   48a0	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:02:58 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16076	    128	   2224	  18428	   47fc	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:09:23 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16072	    128	   2224	  18424	   47f8	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:12:20 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:136:74: error: 'i' undeclared (first use in this function)
+  136 |   printf("%u", raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS))
+      |                                                                          ^
+../Core/Src/main.c:136:74: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:12:44 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:136:12: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'volatile uint8_t *' {aka 'volatile unsigned char *'} [-Wformat=]
+  136 |   printf("%u", raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (0 * HEIGHT * WIDTH * CHANNELS))
+      |           ~^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |            |                                                          |
+      |            unsigned int                                               volatile uint8_t * {aka volatile unsigned char *}
+      |           %hhn
+../Core/Src/main.c:136:3: error: called object is not a function or function pointer
+  136 |   printf("%u", raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (0 * HEIGHT * WIDTH * CHANNELS))
+      |   ^~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:13:55 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16100	    128	   2224	  18452	   4814	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:14:53 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16100	    128	   2224	  18452	   4814	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:15:52 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16108	    128	   2224	  18460	   481c	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:17:32 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16108	    128	   2224	  18460	   481c	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:18:49 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[ HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES ];
+      |                   ^~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16084	    128	   2224	  18436	   4804	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:25:22 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = *raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:63: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr + ((y * WIDTH + x) * CHANNELS + c), sum);
+      |                                                   ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               |
+      |                                                               uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17012	    128	   2256	  19396	   4bc4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:27:03 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:63: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr + ((y * WIDTH + x) * CHANNELS + c), sum);
+      |                                                   ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                               |
+      |                                                               uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17016	    128	   2256	  19400	   4bc8	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:29:25 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:62: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr++, sum);
+      |                                                   ~~~~~~~~~~~^~
+      |                                                              |
+      |                                                              uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16996	    128	   2256	  19380	   4bb4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:37:57 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17008	    128	   2256	  19392	   4bc0	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:38:23 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-size  part2_filter_kernel.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17008	    128	   2256	  19392	   4bc0	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+17:39:24 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:448:25: warning: initialization of 'uint8_t *' {aka 'unsigned char *'} from 'uint8_t' {aka 'unsigned char'} makes pointer from integer without a cast [-Wint-conversion]
+  448 |         uint8_t* addr = *output_addr;
+      |                         ^
+../Core/Src/main.c:470:55: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  470 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, addr++, sum);
+      |                                                   ~~~~^~
+      |                                                       |
+      |                                                       uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17004	    128	   2256	  19388	   4bbc	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:42:33 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:62: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr++, sum);
+      |                                                   ~~~~~~~~~~~^~
+      |                                                              |
+      |                                                              uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17020	    128	   2256	  19404	   4bcc	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:43:16 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:62: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr++, sum);
+      |                                                   ~~~~~~~~~~~^~
+      |                                                              |
+      |                                                              uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+../Core/Src/main.c:473:23: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint8_t *' {aka 'unsigned char *'} [-Wformat=]
+  473 |         printf("| -- %d| \n\n", output_addr,sum);
+      |                      ~^         ~~~~~~~~~~~
+      |                       |         |
+      |                       int       uint8_t * {aka unsigned char *}
+      |                      %hhn
+../Core/Src/main.c:473:16: warning: too many arguments for format [-Wformat-extra-args]
+  473 |         printf("| -- %d| \n\n", output_addr,sum);
+      |                ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17012	    128	   2256	  19396	   4bc4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:44:16 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:62: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr++, sum);
+      |                                                   ~~~~~~~~~~~^~
+      |                                                              |
+      |                                                              uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17016	    128	   2256	  19400	   4bc8	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:45:50 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:63: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, output_addr +=8, sum);
+      |                                                   ~~~~~~~~~~~~^~~
+      |                                                               |
+      |                                                               uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17016	    128	   2256	  19400	   4bc8	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:48:40 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:84: error: expected ')' before ';' token
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8, sum);
+      |                          ~                                                         ^
+      |                                                                                    )
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8, sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+../Core/Src/main.c:469:9: error: too few arguments to function 'HAL_FLASH_Program'
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8, sum);
+      |         ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:19: note: declared here
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                   ^~~~~~~~~~~~~~~~~
+../Core/Src/main.c:473:52: error: expected ';' before '}' token
+  473 |         printf("|%p -- %d| \n\n", output_addr,sum);
+      |                                                    ^
+      |                                                    ;
+  474 |       }
+      |       ~                                             
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:50:16 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:19: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t ryan = raw_data[( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES)];
+      |                   ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17016	    128	   2256	  19400	   4bc8	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:51:08 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:27: warning: initialization discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  135 |           uint8_t* ryan = raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
+      |                           ^~~~~~~~
+../Core/Src/main.c:135:20: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t* ryan = raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
+      |                    ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17012	    128	   2256	  19396	   4bc4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:52:06 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:20: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t* ryan = (uint8_t*) raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
+      |                    ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17012	    128	   2256	  19396	   4bc4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:52:54 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:133:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  133 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:134:91: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |                                    raw_data + ( HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES) + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:75:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   75 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:135:20: warning: unused variable 'ryan' [-Wunused-variable]
+  135 |           uint8_t* ryan = (uint8_t*) raw_data + (HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES * 8);
+      |                    ^~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17012	    128	   2256	  19396	   4bc4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:56:56 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:134:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:135:48: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  135 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:469:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  469 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  17004	    132	   2252	  19388	   4bbc	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+17:58:40 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-size  part2_filter_kernel.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17004	    132	   2252	  19388	   4bbc	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+18:04:11 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:134:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  134 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:135:48: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  135 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:473:51: warning: passing argument 2 of 'HAL_FLASH_Program' makes integer from pointer without a cast [-Wint-conversion]
+  473 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |
+      |                                                   uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:335,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:306:68: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+  306 | HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint64_t Data);
+      |                                                           ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16932	    132	   2252	  19316	   4b74	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+18:09:28 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:138:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  138 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:139:48: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  139 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:143:11: warning: implicit declaration of function 'rintf' [-Wimplicit-function-declaration]
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+../Core/Src/main.c:25:1: note: include '<math.h>' or provide a declaration of 'rintf'
+   24 | #include <stdio.h>
+  +++ |+#include <math.h>
+   25 | /* USER CODE END Includes */
+../Core/Src/main.c:143:11: warning: incompatible implicit declaration of built-in function 'rintf' [-Wbuiltin-declaration-mismatch]
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+../Core/Src/main.c:143:11: note: include '<math.h>' or provide a declaration of 'rintf'
+../Core/Src/main.c:143:17: error: incompatible type for argument 1 of 'rintf'
+  143 |           rintf("%u|", ryan);
+      |                 ^~~~~
+      |                 |
+      |                 char *
+../Core/Src/main.c:143:17: note: expected 'float' but argument is of type 'char *'
+../Core/Src/main.c:143:11: error: too many arguments to function 'rintf'
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+../Core/Src/main.c: In function 'image_filter':
+../Core/Src/main.c:479:22: error: expected expression before '=' token
+  479 |         output_addr* = sum;
+      |                      ^
+../Core/Src/main.c: In function 'optimized_image_filter':
+../Core/Src/main.c:518:63: error: 'output_addr' undeclared (first use in this function); did you mean 'output_data'?
+  518 |         HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, (uint8_t*) (output_addr +=8), sum);
+      |                                                               ^~~~~~~~~~~
+      |                                                               output_data
+../Core/Src/main.c:518:63: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+18:10:02 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:138:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  138 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:139:48: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  139 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:143:11: warning: implicit declaration of function 'rintf' [-Wimplicit-function-declaration]
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+../Core/Src/main.c:25:1: note: include '<math.h>' or provide a declaration of 'rintf'
+   24 | #include <stdio.h>
+  +++ |+#include <math.h>
+   25 | /* USER CODE END Includes */
+../Core/Src/main.c:143:11: warning: incompatible implicit declaration of built-in function 'rintf' [-Wbuiltin-declaration-mismatch]
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+../Core/Src/main.c:143:11: note: include '<math.h>' or provide a declaration of 'rintf'
+../Core/Src/main.c:143:17: error: incompatible type for argument 1 of 'rintf'
+  143 |           rintf("%u|", ryan);
+      |                 ^~~~~
+      |                 |
+      |                 char *
+../Core/Src/main.c:143:17: note: expected 'float' but argument is of type 'char *'
+../Core/Src/main.c:143:11: error: too many arguments to function 'rintf'
+  143 |           rintf("%u|", ryan);
+      |           ^~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+18:10:34 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:138:33: warning: passing argument 1 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  138 |           image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:28: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                   ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:139:48: warning: passing argument 2 of 'image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  139 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:76:49: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   76 | void image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                        ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16004	    132	   2220	  18356	   47b4	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+18:14:16 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:129:43: warning: passing argument 1 of 'optimized_image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  129 |           optimized_image_filter(raw_data + (i * HEIGHT * WIDTH * CHANNELS),
+      |                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:77:38: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   77 | void optimized_image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                             ~~~~~~~~~^~~~~~~~~~
+../Core/Src/main.c:130:48: warning: passing argument 2 of 'optimized_image_filter' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  130 |                                    output_data + (i * HEIGHT * WIDTH * CHANNELS));
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:77:59: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+   77 | void optimized_image_filter(uint8_t *image_addr, uint8_t *output_addr);
+      |                                                  ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "part2_filter_kernel.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\School\4th Year\2nd Semester\ENCM 515\ENCM-515-Project\part2\part2_filter_kernel\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="part2_filter_kernel.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: part2_filter_kernel.elf
+ 
+arm-none-eabi-size  part2_filter_kernel.elf 
+arm-none-eabi-objdump -h -S part2_filter_kernel.elf  > "part2_filter_kernel.list"
+   text	   data	    bss	    dec	    hex	filename
+  16336	    132	   2220	  18688	   4900	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
+Finished building: part2_filter_kernel.list
+ 
+18:14:36 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+make -j8 all 
+arm-none-eabi-size  part2_filter_kernel.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16336	    132	   2220	  18688	   4900	part2_filter_kernel.elf
+Finished building: default.size.stdout
+ 
