@@ -46,5 +46,15 @@ def binary_to_rgb_images(binary_file, width, height):
 # Example usage
 # binary_to_rgb_images("part2/combined.bin", 64, 64)
 
-# Filter
-binary_to_rgb_images("part2/test.bin", 64, 64)
+# Filter Testing (to be overwritten by new binary file)
+binary_to_rgb_images("part2/filter_testing/test.bin", 64, 64)
+
+"""
+Below filter tests were used when developing functions.
+You can uncomment these tests if you wish to see the results  
+"""
+# Sharpen Filter Test
+# binary_to_rgb_images("part2/filter_testing/test2.bin", 64, 64)
+
+# Edge Filter test
+# binary_to_rgb_images("part2/filter_testing/test3.bin", 64, 64)

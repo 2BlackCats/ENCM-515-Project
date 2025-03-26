@@ -48,22 +48,22 @@ def convolution(image, kernel, target_pixel):
     return result_RGB
 
 
-# Define image as given in lab
-# R portion of 4x4 pixel image
-image = np.array([[[255, 0, 0, 128],
-                   [0, 0, 0, 0],
-                   [0, 0, 0, 0],
-                   [128, 128, 128, 128]],
-                  # G portion of 4x4 pixel image
-                  [[0, 255, 0, 128],
-                   [0, 0, 0, 0],
-                   [128, 128, 128, 128],
-                   [0, 0, 0, 0]],
-                  # B portion of 4x4 pixel image
-                  [[0, 0, 255, 128],
-                   [128, 128, 128, 128],
-                   [0, 0, 0, 0],
-                   [0, 0, 0, 0]]])
+# Define top left 4x4 area of image
+# R portion of pixels
+image = np.array([[[113, 112, 111, 112],
+                   [116, 115, 114, 115],
+                   [117, 115, 115, 115],
+                   [116, 115, 114, 113]],
+                  # G portion of pixels
+                  [[175, 174, 173, 174],
+                   [178, 177, 176, 177],
+                   [179, 177, 177, 177],
+                   [178, 177, 176, 175]],
+                  # B portion of pixels
+                  [[234, 233, 232, 233],
+                   [237, 236, 235, 236],
+                   [236, 234, 234, 234],
+                   [235, 234, 233, 232]]])
 
 '''
 *Aside*
@@ -75,6 +75,6 @@ identity = np.array([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
 sharpen = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
 
 # Test kernel filter
-print(get_3x3_region(image2, 0, 1))
+print(get_3x3_region(image, 0, 1))
 print("\n")
-print(convolution(image2, sharpen, (0, 1)))
+print(convolution(image, sharpen, (0, 1)))
