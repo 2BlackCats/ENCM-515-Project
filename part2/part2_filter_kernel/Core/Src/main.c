@@ -59,17 +59,17 @@ SPI_HandleTypeDef hspi1;
 /* USER CODE BEGIN PV */
 volatile uint8_t *raw_data = (uint8_t *)0x8020000;
 volatile uint8_t *output_data = (uint8_t *)0x8020000 + (HEIGHT * WIDTH * CHANNELS * TOTAL_IMAGES);
-int16_t kernel[3][3] = {
-    {0, -1, 0},
-    {-1, 5, -1},
-    {0, -1, 0}
-};
-
 //int16_t kernel[3][3] = {
-//    {-1, -1, -1},
-//    {-1, 8, -1},
-//    {-1, -1, -1}
+//    {0, -1, 0},
+//    {-1, 5, -1},
+//    {0, -1, 0}
 //};
+
+int16_t kernel[3][3] = {
+    {-1, -1, -1},
+    {-1, 8, -1},
+    {-1, -1, -1}
+};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
