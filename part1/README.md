@@ -7,16 +7,18 @@ The system can be configured to test different modes of the filtering process, i
 
 
 ## Configuration Modes
-The system provides several configuration modes, each designed for different testing or processing scenarios.
-There are two macros that influence the code: "CONFIG_MODE" and TEST_MODE. The combinations of these 2 variables
-and their outcomes are explained below.
+The system provides several configuration modes, each designed for different testing or processing scenarios. Two key macros, CONFIG_MODE and TEST_MODE, control the functionality of the system. These macros define the filter's processing configuration, and their combinations are outlined below.
 
-### TEST_MODE = 1
-Indicates testing.
-- CONFIG_MODE = 0
-Testing the circular buffer without MLA optimization.
-- CONFIG_MODE = 1
-Testing the circular buffer with MLA optimization.
+### TEST_MODE = 1 - Indicates testing.
+- CONFIG_MODE = 0:
+Testing the circular buffer processor function without MLA optimization.
+- CONFIG_MODE = 1:
+Testing the circular buffer processing function with MLA optimization.
+- CONFIG_MODE = 2:
+Testing the frame-based processing function.
+- CONFIG_MODE = 3:
+Testing the frame-based processing function with MLA.
+
 
 
 
