@@ -12,7 +12,8 @@ There are two macros that influence the code: "CONFIG_MODE" and TEST_MODE. The c
 and their outcomes are explained below.
 
 ### TEST_MODE 1
+---
 Indicates testing.
-#### CONFIG_MODE 0
+1. CONFIG_MODE 0
 Testing the circular buffer without MLA optimization.
 
