@@ -1,10 +1,10 @@
-18:14:36 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
+13:23:43 **** Incremental Build of configuration Debug for project part2_filter_kernel ****
 make -j8 all 
 arm-none-eabi-size  part2_filter_kernel.elf 
    text	   data	    bss	    dec	    hex	filename
-  16336	    132	   2220	  18688	   4900	part2_filter_kernel.elf
+  13384	     40	   1920	  15344	   3bf0	part2_filter_kernel.elf
 Finished building: default.size.stdout
  
 
-18:14:37 Build Finished. 0 errors, 0 warnings. (took 441ms)
+13:23:44 Build Finished. 0 errors, 0 warnings. (took 439ms)
 
