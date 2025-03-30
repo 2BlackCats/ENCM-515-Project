@@ -30,8 +30,8 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
-#define TEST_MODE  1 // Change according to README.md
-#define CONFIG_MODE 3 // Change according to README.md
+#define TEST_MODE  0 // Change according to README.md
+#define CONFIG_MODE 5 // Change according to README.md
 #define true 1
 #define false 0
 
@@ -601,47 +601,73 @@ static int16_t ProcessSampleCircular(int16_t newsample, int16_t* history) {
 }
 
 
+
 static int16_t ProcessSampleCircular2(int16_t newsample, int16_t* history) {
 
-	// set the new sample as the head
-	history[head] = newsample;
+    // set the new sample as the head
+    history[head] = newsample;
 
-	// set up and do our convolution
-	int tap = 0; // indexing filter_coeffs
-	int current = head; //  indexing history array
-	int32_t accumulator = 0;
-	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
-		current = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
+    // set up and do our convolution
+    int tap = 0; // indexing filter_coeffs
+    int current = head; // indexing history array
+    int32_t accumulator = 0;
 
-		// accumulating with MLA
-		__asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
-											: [result] "=r" (accumulator)
-											: [op1] "r" ((int32_t)filter_coeffs[tap]),
-											  [op2] "r" ((int32_t)history[current]),
-											  [acc] "r" (accumulator)
-											);
-		}
+    // unrolling the loop to process two taps at a time
+    for (tap = 0; tap < (NUMBER_OF_TAPS / 2) * 2; tap += 2) {
 
-	// assign new head and tail (if buffer full)
-	head = (head + 1) % NUMBER_OF_TAPS;
+        current = (head - tap) % NUMBER_OF_TAPS;
+        int history_idx_1 = (current + NUMBER_OF_TAPS - 1) % NUMBER_OF_TAPS;
+        int history_idx_2 = (current + NUMBER_OF_TAPS) % NUMBER_OF_TAPS;
 
+        // first tap (for tap)
+        __asm volatile ("SMLABB %[result1], %[op1], %[op2], %[acc1]"
+                        : [result1] "=r" (accumulator)
+                        : [op1] "r" ((int32_t)filter_coeffs[tap]),
+                          [op2] "r" ((int32_t)history[history_idx_2]),
+                          [acc1] "r" (accumulator)
+                        );
 
+        // second tap (for tap+1)
+        __asm volatile ("SMLABB %[result2], %[op1], %[op2], %[acc2]"
+                        : [result2] "=r" (accumulator)
+                        : [op1] "r" ((int32_t)filter_coeffs[tap + 1]),
+                          [op2] "r" ((int32_t)history[history_idx_1]),
+                          [acc2] "r" (accumulator)
+                        );
+    }
 
-	if (accumulator > 0x3FFFFFFF) {
-		accumulator = 0x3FFFFFFF;
-		overflow_count++;
-	} else if (accumulator < -0x40000000) {
-		accumulator = -0x40000000;
-		underflow_count++;
-	}
+    // if NUMBER_OF_TAPS is odd, process the last tap
+    if (NUMBER_OF_TAPS % 2 != 0) {
+        current = (current + (NUMBER_OF_TAPS - 2)) % NUMBER_OF_TAPS;
+        __asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
+                        : [result] "=r" (accumulator)
+                        : [op1] "r" ((int32_t)filter_coeffs[NUMBER_OF_TAPS - 1]),
+                          [op2] "r" ((int32_t)history[current]),
+                          [acc] "r" (accumulator)
+                        );
+    }
 
-	int16_t temp;
-	if (accumulator < 1000 && accumulator > -1000) {
-		temp = (int16_t)accumulator;
-	} else{
-		temp = (int16_t)(accumulator >> 15);
-	}
-	return temp;
+    // assign new head and tail (if buffer full)
+    head = (head + 1) % NUMBER_OF_TAPS;
+
+    // handle overflow/underflow
+    if (accumulator > 0x3FFFFFFF) {
+        accumulator = 0x3FFFFFFF;
+        overflow_count++;
+    } else if (accumulator < -0x40000000) {
+        accumulator = -0x40000000;
+        underflow_count++;
+    }
+
+    // convert accumulator to int16_t
+    int16_t temp;
+    if (accumulator < 1000 && accumulator > -1000) {
+        temp = (int16_t)accumulator;
+    } else {
+        temp = (int16_t)(accumulator >> 15);
+    }
+
+    return temp;
 }
 
 static int  ProcessBlock(int16_t newsample, int16_t* history) {
@@ -661,6 +687,7 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
 	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
 	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
 			int32_t coeff = (int32_t)filter_coeffs[tap]; // loading the coefficient once
+
 			int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
 
 			for (int i = 0; i < FRAME_SIZE; i++){
@@ -697,67 +724,100 @@ static int  ProcessBlock(int16_t newsample, int16_t* history) {
 
 
 }
-static int  ProcessBlock2(int16_t newsample, int16_t* history) {
 
 
-	history[head] = newsample;
-	if (samples_since_last_frame++ < FRAME_SIZE - 1){
-		head = (head + 1) % HISTORY_SIZE;
 
-		return false;
-		// returning false means that there are not enough samples to for the frame to be processed
-	}
-	samples_since_last_frame = 0;
+static int ProcessBlock2(int16_t newsample, int16_t* history) {
+    // Set the new sample as the head
+    history[head] = newsample;
+
+    if (samples_since_last_frame++ < FRAME_SIZE - 1) {
+        head = (head + 1) % HISTORY_SIZE;
+        return false;
+    }
+
+    samples_since_last_frame = 0;
+
+    // Processing the frame
+    int current = head;
+    int32_t accumulators[FRAME_SIZE] = {0};  // accumulator[2] corresponds to the newest sample
+    int tap;
+
+    // Unrolling the outer loop to process multiple taps at once
+    for (tap = 0; tap < (NUMBER_OF_TAPS / 2) * 2; tap += 2, current-=2) {
+        int32_t coeff1 = (int32_t)filter_coeffs[tap];     // First tap coefficient
+        int32_t coeff2 = (int32_t)filter_coeffs[tap + 1]; // Second tap coefficient
+		current = (current + HISTORY_SIZE) % HISTORY_SIZE;
+
+        int base_idx = (current - FRAME_SIZE + HISTORY_SIZE) % HISTORY_SIZE;
+
+        for (int i = 0; i < FRAME_SIZE; i++) {
+            int history_idx_1 = (base_idx + i) % HISTORY_SIZE;
+            int history_idx_2 = (base_idx + i + 1) % HISTORY_SIZE;
+
+            // Separate the assembly instructions for each tap
+            __asm volatile(
+                "SMLABB %[result1], %[op1], %[op2], %[acc1];"
+                : [result1] "=r" (accumulators[i])
+                : [op1] "r" (coeff1),
+                  [op2] "r" ((int32_t)history[history_idx_2]),
+                  [acc1] "r" (accumulators[i])
+            );
+
+            __asm volatile(
+                "SMLABB %[result2], %[op1], %[op2], %[acc2];"
+                : [result2] "=r" (accumulators[i])
+                : [op1] "r" (coeff2),
+                  [op2] "r" ((int32_t)history[history_idx_1]),
+                  [acc2] "r" (accumulators[i])
+            );
+        }
+    }
+
+    // If NUMBER_OF_TAPS is odd, process the last tap
+    if (NUMBER_OF_TAPS % 2 != 0) {
+        int32_t coeff = (int32_t)filter_coeffs[NUMBER_OF_TAPS - 1];
+        int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
+
+        for (int i = 0; i < FRAME_SIZE; i++) {
+            int history_idx = (base_idx + i) % HISTORY_SIZE;
+
+            // Accumulate for the last tap
+            __asm volatile(
+                "SMLABB %[result], %[op1], %[op2], %[acc];"
+                : [result] "=r" (accumulators[i])
+                : [op1] "r" (coeff),
+                  [op2] "r" ((int32_t)history[history_idx]),
+                  [acc] "r" (accumulators[i])
+            );
+        }
+    }
+
+    // Moving the head to the next position
+    head = (head + 1) % HISTORY_SIZE;
+
+    // Handling overflow/underflow and updating the accumulator values
+    for (int i = 0; i < FRAME_SIZE; i++) {
+        if (accumulators[i] > 0x3FFFFFFF) {
+            accumulators[i] = 0x3FFFFFFF;
+            overflow_count++;
+        } else if (accumulators[i] < -0x40000000) {
+            accumulators[i] = -0x40000000;
+            underflow_count++;
+        }
+
+        if (accumulators[i] < 1000 && accumulators[i] > -1000) {
+            accumulators_16[i] = (int16_t)accumulators[i];
+        } else {
+            accumulators_16[i] = (int16_t)(accumulators[i] >> 15);
+        }
+    }
+
+    return true;
+}
 
 
-	// processing the frame
-	int tap, current;
-	int32_t accumulators [FRAME_SIZE] = {0}; // accumulator[2] corresponds to the newest sample
-	for (tap = 0, current = head; tap < NUMBER_OF_TAPS; tap++, current--) {
-			int32_t coeff = (int32_t)filter_coeffs[tap]; // loading the coefficient once
-			int base_idx = (current - MAX_FRAME_IDX + HISTORY_SIZE) % HISTORY_SIZE;
-
-			for (int i = 0; i < FRAME_SIZE; i++){
-
-				int history_idx = (base_idx + i) % HISTORY_SIZE;
-
-				// accumulating using MLA
-				__asm volatile ("SMLABB %[result], %[op1], %[op2], %[acc]"
-									: [result] "=r" (accumulators[i])
-									: [op1] "r" (coeff),
-									  [op2] "r" ((int32_t)history[history_idx]),
-									  [acc] "r" (accumulators[i])
-									);
-			}
-
-			}
-
-
-	head = (head + 1) % HISTORY_SIZE; // moving the head
-
-
-	for (int i = 0; i < FRAME_SIZE; i++){
-		if (accumulators[i] > 0x3FFFFFFF) {
-				accumulators[i]= 0x3FFFFFFF;
-				overflow_count++;
-			} else if (accumulators[i] < -0x40000000) {
-				accumulators[i] = -0x40000000;
-				underflow_count++;
-			}
-
-		if (accumulators[i] < 1000 && accumulators[i] > -1000) {
-			accumulators_16[i] = (int16_t)accumulators[i];
-		} else{
-			accumulators_16[i]= (int16_t)(accumulators[i] >> 15);
-			}
-
-	}
-
-
-	return true;
-
-
-}/*
+/*
 
 RunTestMode() and main() share the same logic but differ in input handling.
 It uses predefined test inputs for controlled testing.
