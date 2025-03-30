@@ -34,9 +34,11 @@ Frame-based processing with frame size of 3 and MLA optimization.
 - CONFIG_MODE = 5:
 Frame-based processing with frame size of 16 and MLA optimization.
 
+## How to Configure
+To configure the system, modify the TEST_MODE and CONFIG_MODE macros at the top of the source file. For example:
 
-
-
+#define TEST_MODE 1  // Set to 1 for testing mode
+#define CONFIG_MODE 3  // Set to the desired configuration mode
 
 
 
