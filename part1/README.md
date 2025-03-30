@@ -65,9 +65,9 @@ When TEST_MODE is set to 1 for testing, you can view the outputs of the test cas
 7. The test results should now show up on the Data Console panel.
 
 ## Compilation and Execution
-1. Transfer the audio file "a440_32f.bin" to the STM32 board using STM32CubeProgrammer.
+1. For normal operation, Transfer the audio file "a440_32f.bin" to the STM32 board using STM32CubeProgrammer.
 2. Build the project using STM32CubeIDE.
-3. Run the program with the desired configurations in Debugging Mode.
+3. Run the program with the desired configurations (normal or test mode) in Debugging Mode.
 4. In Live Expressions or SWV ITM Data Console, check the values of the output buffer to see how the filter processes the audio data.
 
 
