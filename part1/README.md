@@ -11,9 +11,12 @@ The system provides several configuration modes, each designed for different tes
 There are two macros that influence the code: "CONFIG_MODE" and TEST_MODE. The combinations of these 2 variables
 and their outcomes are explained below.
 
-### TEST_MODE 1
----
+### TEST_MODE = 1
 Indicates testing.
-1. CONFIG_MODE 0
+- CONFIG_MODE = 0
 Testing the circular buffer without MLA optimization.
+- CONFIG_MODE = 1
+Testing the circular buffer with MLA optimization.
+
+
 
