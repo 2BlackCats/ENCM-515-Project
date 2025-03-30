@@ -42,6 +42,18 @@ To configure the system, modify the TEST_MODE and CONFIG_MODE macros at the top 
 #define CONFIG_MODE 3  // Set to the desired configuration mode
 
 
+## Execution Flow of main() and RunTestMode()
+All configuration modes pass through main(). Depending on the value of TEST_MODE, either the rest of main() runs for normal operation, or RunTestMode() is executed for testing.
+
+### main() 
+- Calls filter functions on real audio data.
+- Stores/outputs filtered audio.
+
+
+### RunTestmode()
+- Calls filter functions on predefined test data.
+- Displays results in SWV ITM Data Console.
+
 ## Viewing Outputs in Debugging Mode
 When TEST_MODE is set to 1 for testing, you can view the outputs of the test cases in Debugging Mode using SWV ITM Data Console.
 1. Start Debugging Mode.
@@ -49,14 +61,18 @@ When TEST_MODE is set to 1 for testing, you can view the outputs of the test cas
 3. Open ITM Data Console.
 4. Enable ITM Stimulus Port 0 in the SWV settings.
 5. Ensure "Start Trace" is enabled.
-6. Resume the code execution.\
+6. Resume the code execution.
 7. The test results should now show up on the Data Console panel.
 
 ## Compilation and Execution
 1. Transfer the audio file "a440_32f.bin" to the STM32 board using STM32CubeProgrammer.
-2. Build the project usinf STM32CubeIDE.
+2. Build the project using STM32CubeIDE.
 3. Run the program with the desired configurations in Debugging Mode.
 4. In Live Expressions or SWV ITM Data Console, check the values of the output buffer to see how the filter processes the audio data.
+
+
+
+
 
 
 
